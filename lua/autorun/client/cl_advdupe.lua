@@ -60,7 +60,7 @@ local function SendSaveDataToServer(offset, last)
 		if offset <= last then
 			net.WriteBit(false) -- Not last chunk
 			timer.Create( "AdvDupe.SendSaveToServerData", 0.5, 1, function()
-				SendSaveDataToServer( offset, last ) 
+				SendSaveDataToServer( offset, last )
 			end)
 		else
 			net.WriteBit(true) -- This is the last chunk
@@ -145,7 +145,7 @@ net.Receive("AdvDupeDownloadData",function(len)
 		file.Write(filepath, util.Decompress(receiveBuffer) or "")
 		
 		AdvDupeClient.Error( "Your file: \""..filepath.."\" was downloaded from the server", false, true )
-		MsgN("Your file: \""..filepath.."\" was downloaded from the server")
+		Msg"[AdvDupe] " print("Your file: \""..filepath.."\" was downloaded from the server")
 		
 		RunConsoleCommand("adv_duplicator_updatelist")
 		timer.Simple(.5, function() AdvDupeClient.UpdatePercent(-1) end)
@@ -202,7 +202,7 @@ function AdvDupeClient.FileOpts(action, filename, dir, dir2)
 		
 	elseif (action == "makedir") then
 		
-		if file.Exists(file1, "DATA") and file.IsDir(file1) then 
+		if file.Exists(file1, "DATA") and file.IsDir(file1) then
 			AdvDupeClient.Error("Folder Already Exists!")
 			return
 		end
@@ -339,7 +339,7 @@ function AdvDupeClient.SetPercentText( PercentText )
 	fh2 = pheight - 6
 end
 
-local function StartPercent( um ) 
+local function StartPercent( um )
 	AdvDupeClient.SetPercentText( um:ReadString() )
 end
 usermessage.Hook("AdvDupe_Start_Percent", StartPercent)

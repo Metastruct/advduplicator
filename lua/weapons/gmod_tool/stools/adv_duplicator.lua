@@ -143,7 +143,7 @@ function TOOL:RightClick( trace )
 		tr.endpos = StartPos + Vector(0,0,-1024)
 		tr.mask = MASK_NPCSOLID_BRUSHONLY
 		local tr_floor = util.TraceLine( tr )
-		if tr_floor.Hit then 
+		if tr_floor.Hit then
 			StartPos = StartPos  + Vector(0,0,-1) * tr_floor.Fraction * 1024
 		end
 	end
@@ -352,7 +352,7 @@ function TOOL:MakeGhostFromTable( EntTable, pParent, HoldAngle, HoldPos )
 				lPos = lPos + HoldPos
 			end
 			GhostEntity:SetNetworkedBonePosition( k, lPos, v.LocalAngle )
-		end	
+		end
 	end
 	
 	return GhostEntity
@@ -379,7 +379,7 @@ function TOOL:StartGhostEntities( EntityTable, Head, HoldPos, HoldAngle )
 	-- Set NW vars for clientside
 	self.Weapon:SetNetworkedEntity( "GhostEntity", self.GhostEntities[ Head ] )
 	self.Weapon:SetNetworkedVector( "HeadPos", self.GhostEntities[ Head ].Pos )
-	self.Weapon:SetNetworkedAngle( 	"HeadAngle", self.GhostEntities[ Head ].Angle )	
+	self.Weapon:SetNetworkedAngle( 	"HeadAngle", self.GhostEntities[ Head ].Angle )
 	self.Weapon:SetNetworkedVector( "HoldPos", HoldPos )
 	self.Weapon:SetNetworkedAngle( "HoldAngle", EntityTable[ Head ].LocalAngle )
 	
@@ -429,7 +429,7 @@ function TOOL:UpdateGhostEntities()
 		
 		local height = self:GetClientNumber( "height" )
 		if(height > 1024)then height = 1024 end
-		self.Weapon:SetNetworkedFloat( "height", height )	
+		self.Weapon:SetNetworkedFloat( "height", height )
 		
 		self.Weapon:SetNetworkedBool( "worldOrigin", false )
 		self.Weapon:SetNetworkedBool( "worldAngles", false )
@@ -464,7 +464,7 @@ function TOOL:UpdateGhostEntities()
 		
 	end
 	
-	if not IsValid(GhostEnt) then 
+	if not IsValid(GhostEnt) then
 		self:ReleaseGhostEntity()
 		self.GhostEntities = nil
 		self.UnfinishedGhost = false
@@ -529,7 +529,7 @@ function TOOL:AddToGhost()
 		self.GhostEntities[self.HeadEntityIdx].Pos 		=	self.Entities[self.HeadEntityIdx].LocalPos
 		self.GhostEntities[self.HeadEntityIdx].Angle 	=	self.Entities[self.HeadEntityIdx].LocalAngle - self.HoldAngle
 		self.Weapon:SetNetworkedVector( "HeadPos",			self.GhostEntities[self.HeadEntityIdx].Pos )
-		self.Weapon:SetNetworkedAngle( 	"HeadAngle",		self.GhostEntities[self.HeadEntityIdx].Angle )	
+		self.Weapon:SetNetworkedAngle( 	"HeadAngle",		self.GhostEntities[self.HeadEntityIdx].Angle )
 		self.Weapon:SetNetworkedVector( "HoldPos",			self.HoldPos )
 		
 		local ghostcount = 0
@@ -717,7 +717,7 @@ function TOOL:SaveFile( filename, desc )
 	if (!filename) or (!self.Entities) then return end
 	if (self.Legacy) or (!self.Copied) then return end
 	
-	local Filename, Creator, Desc, NumOfEnts, NumOfConst, FileVersion = AdvDupe.SaveDupeTablesToFile( 
+	local Filename, Creator, Desc, NumOfEnts, NumOfConst, FileVersion = AdvDupe.SaveDupeTablesToFile(
 		self:GetOwner(), self.Entities, self.Constraints,
 		self.HeadEntityIdx, self.HoldAngle, self.HoldPos,
 		filename, desc, self.StartPos, (self:GetClientNumber( "debugsave" ) == 1)
@@ -808,7 +808,7 @@ else
 		AdvDupeClient.LoadListFiles = {}
 		AdvDupeClient.SScdir = net.ReadString()
 		local updir = net.ReadString()
-		if updir ~= "" then 
+		if updir ~= "" then
 			AdvDupeClient.LoadListDirs["/.."] = updir
 		else
 			-- They're in their root folder, show them public folders
@@ -836,7 +836,7 @@ else
 			AdvDupeClient.SScdir2 = net.ReadString()
 			
 			local updir = net.ReadString()
-			if updir ~= "" then 
+			if updir ~= "" then
 				AdvDupeClient.LoadListDirs2["/.."] = updir
 			else
 				-- They're in their root folder, show them public folders
@@ -951,8 +951,8 @@ if SERVER then
 	--Load duplicated file or open folder
 	local function AdvDupeSS_Open( pl, command, args )
 		
-		if !pl:IsValid() 
-		or !pl:IsPlayer() 
+		if !pl:IsValid()
+		or !pl:IsPlayer()
 		then return end
 		
 		local tool = pl:GetActiveWeapon()
@@ -1047,10 +1047,10 @@ if SERVER then
 	-- Clientside save of duplicated ents
 	--[[local function AdvDupeCL_Save( pl, command, args )
 		
-		if !pl:IsValid() 
-		or !pl:IsPlayer() 
-		--or !pl:GetTable().Duplicator 
-		or !AdvDupe[pl] 
+		if !pl:IsValid()
+		or !pl:IsPlayer()
+		--or !pl:GetTable().Duplicator
+		or !AdvDupe[pl]
 		then return end
 
 		--save to file
@@ -1092,7 +1092,7 @@ if SERVER then
 		AdvDupe.SetPercent(self:GetOwner(), Percent)
 	end
 	
-end	
+end
 	
 if CLIENT then
 	
@@ -1316,7 +1316,7 @@ if CLIENT then
 			CPanel:NumSlider("Range", "adv_duplicator_range", 0, 1000, 0)
 			CPanel:CheckBox("Show Beam", "adv_duplicator_show_beam")
 			
-			local params = { 
+			local params = {
 				Label		= "#Spawn Key",
 				Label2		= "#Undo Key",
 				Command		= "adv_duplicator_pasterkey",

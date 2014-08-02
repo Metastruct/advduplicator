@@ -19,7 +19,7 @@ elseif (Serialiser) and (Serialiser.Version) then
 end
 --[[ else --we don't need to tell everyone that it loaded succesfully. If it loads successfully nothing should print
 	Msg("======== Installing Table (De)Serialiser Module | ver: "..ThisVersion.." ========\n")
-end ]] 
+end ]]
 
 Serialiser = {}
 Serialiser.Version = ThisVersion
@@ -138,7 +138,7 @@ local function DeSerialiseChunk( chunk, tables, StrTbl )
 		local a,b,c = val:match("(.-),(.-),(.+)")
 		return Angle( tonumber(a), tonumber(b), tonumber(c) )
 	elseif ctype == "P" then return player.GetByUniqueID( val )
-	elseif ctype == "T" then 
+	elseif ctype == "T" then
 		local t = {}
 		if !tables[ val ] then tables[ val ] = {} end
 		table.insert( tables[ val ], t )
@@ -164,7 +164,7 @@ function Serialiser.SerialiseTableKeyValues( tbl, tables, StrTbl, dontpoolstring
 	
 	return temp
 	
-end	
+end
 
 function Serialiser.SerialiseWithHeaders( Header, ExtraHeader, t, dontpoolstrings )
 	

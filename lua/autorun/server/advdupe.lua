@@ -106,7 +106,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					ExtraHeaderTbl.FileVersion = tonumber(ExtraHeaderTbl.FileVersion)
 					
 					if (ExtraHeaderTbl.FileVersion > AdvDupe.FileVersion) then
-						Msg("AdvDupeINFO:File is newer than installed version, failure may occure, you should update.")
+						Msg"[AdvDupe] " print("AdvDupeINFO:File is newer than installed version, failure may occure, you should update.")
 					end
 					
 					if ( ExtraHeaderTbl.FileVersion >= 0.82 ) and ( ExtraHeaderTbl.FileVersion < 0.9 )then
@@ -155,9 +155,9 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					--[[return Data.Entities, Data.Constraints,
 					{},{}, Data.HeadEntityIdx,
 					Data.HoldAngle,
-					Data.HoldPos, false, 
+					Data.HoldPos, false,
 					HeaderTbl.Creator:sub(2, -2),
-					HeaderTbl.Description:sub(2, -2), 
+					HeaderTbl.Description:sub(2, -2),
 					HeaderTbl.Entities,
 					HeaderTbl.Constraints,
 					ExtraHeaderTbl.FileVersion,
@@ -186,10 +186,10 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					
 					tool:LoadFileCallBack( filepath,
 						Data.Entities, Data.Constraints,
-						{},{}, Data.Head, Angle(0,0,0), 
-						Vector(0,0, -(Data.Height + 8)), --Data.Entities[Data.Head].LocalPos.z + 
+						{},{}, Data.Head, Angle(0,0,0),
+						Vector(0,0, -(Data.Height + 8)), --Data.Entities[Data.Head].LocalPos.z +
 						false, HeaderTbl.Creator:sub(2, -2),
-						"Contraption Saver file v"..ExtraHeaderTbl.Version, 
+						"Contraption Saver file v"..ExtraHeaderTbl.Version,
 						tonumber(HeaderTbl.Entities),
 						tonumber(HeaderTbl.Constraints),
 						tonumber(ExtraHeaderTbl.Version),
@@ -214,9 +214,9 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					
 					tool:LoadFileCallBack( filepath,
 						Data.Entities, Data.Constraints,
-						{},{}, head, Angle(0,0,0), Vector(0,0,0), false, 
+						{},{}, head, Angle(0,0,0), Vector(0,0,0), false,
 						Data.Information.Creator,
-						"Old Contraption Saver file v"..Data.Information.Version, 
+						"Old Contraption Saver file v"..Data.Information.Version,
 						Data.Information.Entities,
 						Data.Information.Constraints,
 						Data.Information.Version,
@@ -227,9 +227,9 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					--[[return Data.Entities, Data.Constraints,
 					{},{}, head,
 					Angle(0,0,0),
-					Vector(0,0,0), false, 
+					Vector(0,0,0), false,
 					Data.Information.Creator,
-					"Old Contraption Saver file v"..Data.Information.Version, 
+					"Old Contraption Saver file v"..Data.Information.Version,
 					Data.Information.Entities,
 					Data.Information.Constraints,
 					Data.Information.Version,
@@ -238,7 +238,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					
 				else
 					AdvDupe.SendClientError(ply, "Unknown File Type or Bad File")
-					Msg("AdvDupeERROR: Unknown File Type or Bad File\n")
+					Msg"[AdvDupe] " print("AdvDupeERROR: Unknown File Type or Bad File")
 					AdvDupe.SetPercent( ply, -1 )
 					return
 				end
@@ -271,7 +271,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 		end
 		
 		if (temp) and (temp["VersionInfo"]) and (temp["VersionInfo"]["FileVersion"] > AdvDupe.FileVersion) then
-			Msg("AdvDupeINFO:File is newer than installed version, failure may occure, you should update.")
+			Msg"[AdvDupe] " print("File is newer than installed version, failure may occure, you should update.")
 		end
 		
 		local function Load3(ply, filepath, tool, temp)
@@ -280,16 +280,16 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 				--MsgN("AdvDupe:Loaded old file ",filepath,"  version: ",temp.VersionInfo.FileVersion)
 				
 				tool:LoadFileCallBack( filepath,
-					temp.EntTables, temp.ConstraintTables, {},{}, 
-					temp.HeadEntityIdx, temp.HoldAngle, temp.HoldPos, 
-					false, temp.VersionInfo.Creator, temp.VersionInfo.Desc, 
-					temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst, 
+					temp.EntTables, temp.ConstraintTables, {},{},
+					temp.HeadEntityIdx, temp.HoldAngle, temp.HoldPos,
+					false, temp.VersionInfo.Creator, temp.VersionInfo.Desc,
+					temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst,
 					temp.VersionInfo.FileVersion
 				)
 				
-				--[[return temp.EntTables, temp.ConstraintTables, {},{}, 
-				temp.HeadEntityIdx, temp.HoldAngle, temp.HoldPos, false, 
-				temp.VersionInfo.Creator, temp.VersionInfo.Desc, temp.VersionInfo.NumOfEnts, 
+				--[[return temp.EntTables, temp.ConstraintTables, {},{},
+				temp.HeadEntityIdx, temp.HoldAngle, temp.HoldPos, false,
+				temp.VersionInfo.Creator, temp.VersionInfo.Desc, temp.VersionInfo.NumOfEnts,
 				temp.VersionInfo.NumOfConst, temp.VersionInfo.FileVersion--]]
 				
 			--Legacy versions, there are no version 0.5 files
@@ -306,17 +306,17 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 				end
 				
 				tool:LoadFileCallBack( filepath,
-					temp.Ents, temp.Constraints, temp.DupeInfo, 
-					(temp.DORInfo or {}), temp.HeadEntID, temp.HoldAngle, Vector(0,0,0), 
-					true, temp.VersionInfo.Creator, temp.VersionInfo.Desc, 
-					temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst, 
+					temp.Ents, temp.Constraints, temp.DupeInfo,
+					(temp.DORInfo or {}), temp.HeadEntID, temp.HoldAngle, Vector(0,0,0),
+					true, temp.VersionInfo.Creator, temp.VersionInfo.Desc,
+					temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst,
 					temp.VersionInfo.FileVersion
 				)
 				
-				--[[return temp.Ents, temp.Constraints, temp.DupeInfo, 
-				(temp.DORInfo or {}), temp.HeadEntID, temp.HoldAngle, Vector(0,0,0), 
-				true, temp.VersionInfo.Creator, temp.VersionInfo.Desc, 
-				temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst, 
+				--[[return temp.Ents, temp.Constraints, temp.DupeInfo,
+				(temp.DORInfo or {}), temp.HeadEntID, temp.HoldAngle, Vector(0,0,0),
+				true, temp.VersionInfo.Creator, temp.VersionInfo.Desc,
+				temp.VersionInfo.NumOfEnts, temp.VersionInfo.NumOfConst,
 				temp.VersionInfo.FileVersion--]]
 				
 			elseif (temp) and (temp["Information"]) then --Old Contrpation Saver File
@@ -338,7 +338,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 					temp.Entities, temp.Constraints,
 					{},{}, head, Angle(0,0,0), Vector(0,0,0),
 					false, temp.Information.Creator, "Old Contrpaption Saver File",
-					temp.Information.Entities, temp.Information.Constraints, 
+					temp.Information.Entities, temp.Information.Constraints,
 					"Old Contrpaption Saver File", temp.Date
 				)
 				
@@ -349,7 +349,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 				
 				
 			else
-				MsgN("AdvDupeERROR:FILE FAILED TO LOAD! something is wrong with this file:  ",filepath)
+				Msg"[AdvDupe] " print("FILE FAILED TO LOAD! something is wrong with this file:  ",filepath)
 				AdvDupe.SendClientError( ply, "Failed loading file" )
 				AdvDupe.SetPercent( ply, -1 )
 			end
@@ -527,7 +527,7 @@ function AdvDupe.GetSaveableEntity( Ent, Offset )
 	-- Physics Objects
 	Tab.PhysicsObjects =  Tab.PhysicsObjects or {}
 	local iNumPhysObjects = Ent:GetPhysicsObjectCount()
-	for Bone = 0, iNumPhysObjects-1 do 
+	for Bone = 0, iNumPhysObjects-1 do
 		local PhysObj = Ent:GetPhysicsObjectNum( Bone )
 		if ( PhysObj:IsValid() ) then
 			Tab.PhysicsObjects[ Bone ] = Tab.PhysicsObjects[ Bone ] or {}
@@ -637,7 +637,7 @@ function AdvDupe.GetSaveableEntity( Ent, Offset )
 	end
 	SaveableEntity.arglist = ArgList--]]
 	
-	return SaveableEntity	
+	return SaveableEntity
 end
 
 --
@@ -830,7 +830,7 @@ if (dupeshare and dupeshare.PublicDirs) then
 	for k, v in pairs(dupeshare.PublicDirs) do
 		local dir = (dupeshare.BaseDir.."/"..v):lower()
 		AdvDupe.PublicDirs[v] = dir
-		if ( !file.Exists(dir, "DATA") ) or ( file.Exists(dir, "DATA") and !file.IsDir(dir, "DATA") ) then 
+		if ( !file.Exists(dir, "DATA") ) or ( file.Exists(dir, "DATA") and !file.IsDir(dir, "DATA") ) then
 			file.CreateDir( dupeshare.ParsePath(dir), "DATA" )
 		end
 	end
@@ -866,7 +866,7 @@ function AdvDupe.MakeDir(ply, cmd, args)
 	
 	--[[local dir = AdvDupe[ply].cdir.."/"..dupeshare.ReplaceBadChar(args[1])
 	
-	if file.Exists(dir) and file.IsDir(dir) then 
+	if file.Exists(dir) and file.IsDir(dir) then
 		AdvDupe.SendClientError(ply, "Folder Already Exists!")
 		return
 	end
@@ -918,15 +918,15 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 	local file1 = (dir.."/"..filename):lower()
 	--MsgN("action= ",action,"  filename= ",filename,"  dir= ",dir,"  dir2= ",(dir2 or "none"))
 	
-	if not AdvDupe.CheckPerms(ply, "", dir, "access") then 
+	if not AdvDupe.CheckPerms(ply, "", dir, "access") then
 		AdvDupe.SendClientError(ply, "You lack access permissions in "..dir)
-		return 
+		return
 	end
 	
 	if (action == "delete") then
-		if not AdvDupe.CheckPerms(ply, "", dir, "delete") then 
+		if not AdvDupe.CheckPerms(ply, "", dir, "delete") then
 			AdvDupe.SendClientError(ply, "You lack delete permissions in "..dir)
-			return 
+			return
 		end
 		
 		file.Delete(dupeshare.ParsePath(file1))
@@ -934,9 +934,9 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 		AdvDupe.UpdateList(ply)
 		
 	elseif (action == "copy") then
-		if not AdvDupe.CheckPerms(ply, "", dir2, "write") then 
+		if not AdvDupe.CheckPerms(ply, "", dir2, "write") then
 			AdvDupe.SendClientError(ply, "You lack write permissions in "..dir2)
-			return 
+			return
 		end
 		
 		local file2 = (dir2.."/"..filename):lower()
@@ -953,13 +953,13 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 		AdvDupe.UpdateList(ply)
 		
 	elseif (action == "move") then
-		if not AdvDupe.CheckPerms(ply, "", dir, "delete") then 
+		if not AdvDupe.CheckPerms(ply, "", dir, "delete") then
 			AdvDupe.SendClientError(ply, "You lack delete permissions in "..dir)
-			return 
+			return
 		end
-		if not AdvDupe.CheckPerms(ply, "", dir2, "write") then 
+		if not AdvDupe.CheckPerms(ply, "", dir2, "write") then
 			AdvDupe.SendClientError(ply, "You lack write permissions in "..dir2)
-			return 
+			return
 		end
 		
 		if dir == dir2 then
@@ -971,9 +971,9 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 		AdvDupe.FileOpts(ply, "delete", filename, dir)
 		
 	elseif (action == "makedir") then
-		if not AdvDupe.CheckPerms(ply, "", dir, "write") then 
+		if not AdvDupe.CheckPerms(ply, "", dir, "write") then
 			AdvDupe.SendClientError(ply, "You lack write permissions in "..dir)
-			return 
+			return
 		end
 		
 		if !game.SinglePlayer() and dupeshare.NamedLikeAPublicDir(filename) then
@@ -981,7 +981,7 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 			return
 		end
 		
-		if file.Exists(file1, "DATA") and file.IsDir(file1, "DATA") then 
+		if file.Exists(file1, "DATA") and file.IsDir(file1, "DATA") then
 			AdvDupe.SendClientError(ply, "Folder Already Exists!")
 			return
 		end
@@ -991,18 +991,18 @@ function AdvDupe.FileOpts(ply, action, filename, dir, dir2)
 		AdvDupe.UpdateList(ply)
 		
 	elseif (action == "rename") then
-		if not (AdvDupe.CheckPerms(ply, "", dir, "delete") and AdvDupe.CheckPerms(ply, "", dir, "write")) then 
+		if not (AdvDupe.CheckPerms(ply, "", dir, "delete") and AdvDupe.CheckPerms(ply, "", dir, "write")) then
 			AdvDupe.SendClientError(ply, "You lack delete permissions in "..dir)
-			return 
+			return
 		end
 		
 		AdvDupe.FileOpts(ply, "duplicate", filename, dir, dir2)
 		AdvDupe.FileOpts(ply, "delete", filename, dir)
 		
 	elseif (action == "duplicate") then
-		if not AdvDupe.CheckPerms(ply, "", dir, "write") then 
+		if not AdvDupe.CheckPerms(ply, "", dir, "write") then
 			AdvDupe.SendClientError(ply, "You lack delete permissions in "..dir)
-			return 
+			return
 		end
 		
 		local file2 = (dir.."/"..dir2):lower() --using dir2 to hold the new filename
@@ -1040,7 +1040,7 @@ end
 --todo: make enum error codes
 function AdvDupe.SendClientError(ply, errormsg, NoSound)
 	if ( !IsValid(ply) or !ply:IsPlayer() or !errormsg ) then return end
-	MsgN("AdvDupe: Sending this ErrorMsg to ",tostring(ply),"\nAdvDupe-ERROR: \"",tostring(errormsg).."\"")
+	Msg"[AdvDupe] " print(tostring(ply)," ERROR: '",tostring(errormsg).."'")
 	umsg.Start("AdvDupeCLError", ply)
 		umsg.String(errormsg)
 		umsg.Bool(NoSound)
@@ -1048,7 +1048,7 @@ function AdvDupe.SendClientError(ply, errormsg, NoSound)
 end
 function AdvDupe.SendClientInfoMsg(ply, msg, NoSound)
 	if ( !IsValid(ply) or !ply:IsPlayer() or !msg ) then return end
-	MsgN("AdvDupe, Sending This InfoMsg to ",tostring(ply),"\nAdvDupe: \"",tostring(msg).."\"")
+	Msg"[AdvDupe] " print(tostring(ply)..": "..tostring(msg)..".")
 	umsg.Start("AdvDupeCLInfo", ply)
 		umsg.String(msg)
 		umsg.Bool(NoSound)
@@ -1112,7 +1112,7 @@ function AdvDupe.GetAdvDupeToolObj(ply)
 	if ( dupeshare.CurrentToolIsDuplicator(tool) ) then
 		return tool:GetTable():GetToolObject()
 	end
-	return 
+	return
 end
 
 
@@ -1140,8 +1140,8 @@ local DownloadPiecesPerSend = 3		--per player. same as above. set it to high and
 local DownloadSendInterval = 0.1	--per player. same as above. this should be the lowest you should use
 local CanDownloadDefault = true		--per player. if you can't figure this out, i have a stick i can hit you with :V
 --ghost settings	-- all per player
-local LimitedGhost = false			--same as the panel option, just overrides that option with true
-local GhostLimitNorm = 500			--max size of ghost. DON'T make it higher than this!!!!
+local LimitedGhost = true			--same as the panel option, just overrides that option with true
+local GhostLimitNorm = 100			--max size of ghost. DON'T make it higher than this!!!!
 local GhostLimitLimited = 50		--size of ghost when limiting is on. minimum is 1
 local GhostAddDelay = .2			--delay between adding to the ghost when ghosting
 local GhostsPerTick = 3				--ghost ents added per tick
@@ -1397,7 +1397,7 @@ function AdvDupe.RecieveFileContentSave( ply, filepath )
 		AdvDupe.SendClientInfoMsg(ply, "Try resending it.", true)
 		
 		ply:PrintMessage(HUD_PRINTCONSOLE, "AdvDupeERROR: Your file, '"..FileName.."', was not recieved properly")
-		MsgN("AdvDupe: This file, '",filepath,"', was not recieved properly")
+		Msg"[AdvDupe] " print("This file, '",filepath,"', was not recieved properly from",ply)
 	else
 	
 		file.Write(dupeshare.ParsePath(filepath), uploaded)
@@ -1471,7 +1471,7 @@ function AdvDupe.SendSaveToClientData(ply, offset, last)
 		if offset <= last then
 			net.WriteBit(false) -- Not last chunk
 			timer.Create( "AdvDupe.SendSaveToClientData_"..ply:UniqueID(), 0.5, 1, function()
-				AdvDupe.SendSaveToClientData( ply, offset, last ) 
+				AdvDupe.SendSaveToClientData( ply, offset, last )
 			end)
 		else
 			net.WriteBit(true) -- This is the last chunk
@@ -1507,7 +1507,7 @@ function AdvDupe.GetPasterClearToPasteDelay()
 	return PasterClearToPasteDelay
 end
 
-local DoPasteFX = false
+local DoPasteFX = true
 local UseTaskSwitchingPaste = false
 local DebugWeldsByDrawingThem = false
 local DontAllowPlayersAdminOnlyEnts = true
@@ -1521,7 +1521,7 @@ local DontAllowPlayersAdminOnlyEnts = true
 --	leave SetPostEntityPastePerTick at the default, it doesn't do much outside of wire and life support
 local function SetTimedPasteVars(ply, cmd, args)
 	if ( args[1] ) and ( ( ply:IsAdmin() ) or ( ply:IsSuperAdmin( )() ) ) then
-		if args[1] then 
+		if args[1] then
 			UseTimedPasteThreshold = tonumber( args[1] )
 		end
 		if args[2] then
@@ -1575,7 +1575,7 @@ function AdvDupe.AdminSettings.SetPasterClearToPasteDelay( a ) if isnumber(a) th
 local function SetUseTaskSwitchingPaste(ply, cmd, args)
 	if ( !ply:IsAdmin() and !ply:IsSuperAdmin( )() ) then return end
 	if ( args[1] ) then
-		if args[1] == "1" or args[1] == 1 then 
+		if args[1] == "1" or args[1] == 1 then
 			UseTaskSwitchingPaste = true
 		elseif args[1] == "0" or args[1] == 0 then
 			UseTaskSwitchingPaste = false
@@ -1598,7 +1598,7 @@ end
 local function SetDoPasteFX(ply, cmd, args)
 	if ( !ply:IsAdmin() and !ply:IsSuperAdmin( )() ) then return end
 	if ( args[1] ) then
-		if args[1] == "1" or args[1] == 1 then 
+		if args[1] == "1" or args[1] == 1 then
 			DoPasteFX = true
 		elseif args[1] == "0" or args[1] == 0 then
 			DoPasteFX = false
@@ -1621,7 +1621,7 @@ end
 local function SetDebugWeldsByDrawingThem(ply, cmd, args)
 	if ( !ply:IsAdmin() and !ply:IsSuperAdmin( )() ) then return end
 	if ( args[1] ) then
-		if args[1] == "1" or args[1] == 1 then 
+		if args[1] == "1" or args[1] == 1 then
 			DebugWeldsByDrawingThem = true
 		elseif args[1] == "0" or args[1] == 0 then
 			DebugWeldsByDrawingThem = false
@@ -1644,7 +1644,7 @@ end
 local function SetDontAllowPlayersAdminOnlyEnts(ply, cmd, args)
 	if ( !ply:IsAdmin() and !ply:IsSuperAdmin( )() ) then return end
 	if ( args[1] ) then
-		if args[1] == "1" or args[1] == 1 then 
+		if args[1] == "1" or args[1] == 1 then
 			DontAllowPlayersAdminOnlyEnts = true
 		elseif args[1] == "0" or args[1] == 0 then
 			DontAllowPlayersAdminOnlyEnts = false
@@ -1706,7 +1706,7 @@ local function AdvDupeThink()
 					
 					local NoFail, Result = xpcall( AdvDupe.NormPasteFromTable, debug.traceback, TimedPasteData[TimedPasteDataCurrent] )
 					if ( !NoFail ) then
-						MsgN("AdvDupeERROR: NormPaste Failed, Error: ",tostring(Result))
+						Msg"[AdvDupe] " print("NormPaste Failed, Error: ",tostring(Result))
 					end
 					
 					AdvDupe.FinishPasting( TimedPasteData, TimedPasteDataCurrent )
@@ -1717,7 +1717,7 @@ local function AdvDupeThink()
 					
 					local NoFail, Result = xpcall( AdvDupe.OverTimePasteProcessFromTable, debug.traceback )
 					if ( !NoFail ) then
-						MsgN("AdvDupeERROR: OverTimePaste Failed in stage ",(TimedPasteData[TimedPasteDataCurrent].Stage or "BadStage"),", Error: ",tostring(Result))
+						Msg"[AdvDupe] " print("OverTimePaste Failed in stage ",(TimedPasteData[TimedPasteDataCurrent].Stage or "BadStage"),", Error: ",tostring(Result))
 						TimedPasteData[TimedPasteDataCurrent].Stage = 5
 					end
 					
@@ -1736,7 +1736,7 @@ local function AdvDupeThink()
 					else
 						
 						if ( !TimedPasteData[TimedPasteDataCurrent].DontRemoveThinger ) then
-							AdvDupe.SetPercent(TimedPasteData[TimedPasteDataCurrent].Player, 
+							AdvDupe.SetPercent(TimedPasteData[TimedPasteDataCurrent].Player,
 								(TimedPasteData[TimedPasteDataCurrent].CallsInRun / TimedPasteData[TimedPasteDataCurrent].TotalTicks) * 100)
 						end
 						
@@ -1766,11 +1766,11 @@ local function AdvDupeThink()
 		if ( value.Finish <= CurTime() ) then
 			local b, e = xpcall( value.Func, debug.traceback, unpack( value.FuncArgs ) )
 			if ( !b ) then
-				MsgN("AdvDupe Timer Error: ",tostring(e))
+				Msg"[AdvDupe] " print("Timer Error: ",tostring(e))
 				if ( value.OnFailFunc ) then
 					local b, e = xpcall( value.OnFailFunc, debug.traceback, unpack( value.OnFailArgs ) )
 					if ( !b ) then
-						MsgN("AdvDupe Timer Error: OnFailFunc Error: ",tostring(e))
+						Msg"[AdvDupe] " print("Timer Error: OnFailFunc Error: ",tostring(e))
 					end
 				end
 			end
@@ -1785,8 +1785,8 @@ hook.Add("Think", "AdvDupe_Think", AdvDupeThink)
 local function ReAddAdvDupeThink( ply, cmd, args )
 	hook.Add("Think", "AdvDupe_Think", AdvDupeThink)
 	ply:PrintMessage(HUD_PRINTCONSOLE, "ReAdded AdvDupe_Think Hook\n")
-end 
-concommand.Add( "AdvDupe_ReAdd_Think", ReAddAdvDupeThink ) 
+end
+concommand.Add( "AdvDupe_ReAdd_Think", ReAddAdvDupeThink )
 --	RestartAdvDupeThink clears all current pasting and restarts the hook, good to clear a paste that keeps bailing the hook each time it tries to run
 local function RestartAdvDupeThink( ply, cmd, args )
 	if ( !ply:IsAdmin() and !ply:IsSuperAdmin( )() ) then return end
@@ -1806,8 +1806,8 @@ local function RestartAdvDupeThink( ply, cmd, args )
 	hook.Add("Think", "AdvDupe_Think", AdvDupeThink)
 	
 	ply:PrintMessage(HUD_PRINTCONSOLE, "Restarted AdvDupe_Think Hook\n")
-end 
-concommand.Add( "AdvDupe_Restart_Think", RestartAdvDupeThink ) 
+end
+concommand.Add( "AdvDupe_Restart_Think", RestartAdvDupeThink )
 
 
 
@@ -1873,15 +1873,35 @@ function AdvDupe.StartPaste( Player, inEntityList, inConstraintList, HeadEntityI
 	hook.Add("Think", "AdvDupe_Think", AdvDupeThink)
 	hook.Run("AdvDupe_StartPasting", Player, NumOfEnts)
 	
+	local extra=""
+	if IsValid(Player) and Player:GetTool().Info then
+		local info=Player:GetTool().Info
+		local FilePath=info.FilePath
+		if FilePath and FilePath!="unsaved data" then
+			extra=" | File '"..tostring(string.GetFileFromFilename(FilePath:gsub("%.txt","") or "") or "").."'"
+		end
+		local Creator=info.Creator
+		if Creator and Creator!=Player:GetName() then
+			extra=extra.." | Creator '"..tostring(Creator).."'"
+		end
+		local Desc=info.Desc
+		if Desc and Desc!="" and Desc!="none" then
+			extra=extra.." | Desc '"..tostring(Desc).."'"
+		end
+	end
 	if ( FromPaster ) and ( NumOfEnts + NumOfConst > PasterInstantPasteThreshold ) then
+		Msg"[AdvDupe] " print(Player,"Pasting")
 		local CreatedEntities, CreatedConstraints = {},{}
 		AdvDupe.NormPaste( Player, inEntityList, inConstraintList, HeadEntityIdx, HitPos, HoldAngle, Thinger, PasteFrozen, PastewoConst, CreatedEntities, CreatedConstraints )
 		CallOnPasteFin( Thinger, CreatedEntities, CreatedConstraints )
 	elseif ( NumOfEnts + NumOfConst > UseTimedPasteThreshold) then
-		--Msg("===adding new timed paste===\n")
+		Msg"[AdvDupe] " print(Player,"pasting "..(PastewoConst and "!" or "")..table.Count(inConstraintList or {})..' consts & '..table.Count(inEntityList or {})..' ents'..extra)
+		for k,v in pairs(player.GetHumans()) do
+			v:ChatPrint(Player:Name() .." pasting a big dupe ("..(PastewoConst and "!" or "")..table.Count(inConstraintList or {})..' consts & '..table.Count(inEntityList or {})..' ents)')
+		end
 		AdvDupe.OverTimePasteStart( Player, inEntityList, inConstraintList, HeadEntityIdx, HitPos, HoldAngle, NumOfEnts, NumOfConst, PasteFrozen, PastewoConst, CallOnPasteFin, DontRemoveThinger, Thinger )
 	else
-		--Msg("===adding new delayed paste===\n")
+		Msg"[AdvDupe] " print(Player,"pasting "..(PastewoConst and "!" or "")..table.Count(inConstraintList or {})..' consts & '..table.Count(inEntityList or {})..' ents'..extra)
 		AdvDupe.AddDelayedPaste( Player, inEntityList, inConstraintList, HeadEntityIdx, HitPos, HoldAngle, false, PasteFrozen, PastewoConst, CallOnPasteFin, DontRemoveThinger, Thinger )
 	end
 end
@@ -1922,7 +1942,7 @@ function AdvDupe.AddDelayedPaste( Player, EntityList, ConstraintList, HeadEntity
 end
 
 function AdvDupe.NormPasteFromTable( PasteData )
-	AdvDupe.NormPaste( PasteData.Player, PasteData.EntityList, PasteData.ConstraintList, 
+	AdvDupe.NormPaste( PasteData.Player, PasteData.EntityList, PasteData.ConstraintList,
 		PasteData.HeadEntityIdx, PasteData.HitPos, PasteData.HoldAngle, PasteData.Shooting_Ent,
 		PasteData.PasteFrozen, PasteData.PastewoConst, PasteData.CreatedEntities, PasteData.CreatedConstraints)
 end
@@ -2013,7 +2033,7 @@ function AdvDupe.Paste( Player, EntityList, ConstraintList, HeadEntityIdx, Offse
 	--
 	-- Apply modifiers to the created entities
 	--
-	for EntID, Ent in pairs( CreatedEntities ) do	
+	for EntID, Ent in pairs( CreatedEntities ) do
 		
 		--AdvDupe.AfterPasteApply( Player, Ent, CreatedEntities )
 		local NoFail, Result = xpcall( AdvDupe.AfterPasteApply, debug.traceback, Player, Ent, CreatedEntities )
@@ -2038,7 +2058,7 @@ function AdvDupe.Paste( Player, EntityList, ConstraintList, HeadEntityIdx, Offse
 				if IsValid( Entity ) then
 					table.insert( CreatedConstraints, Entity )
 				else
-					MsgN("AdvDupeERROR:Could not make constraint type: ",(Constraint.Type or "NIL"))
+					Msg"[AdvDupe] " print("Constraint failed: ",(Constraint.Type or "NIL"))
 				end
 			end
 			
@@ -2106,15 +2126,15 @@ end
 
 function AdvDupe.OverTimePasteProcessFromTable()
 	AdvDupe.OverTimePasteProcess(
-		TimedPasteData[TimedPasteDataCurrent].Player, 
-		TimedPasteData[TimedPasteDataCurrent].EntityList, 
-		TimedPasteData[TimedPasteDataCurrent].ConstraintList, 
-		TimedPasteData[TimedPasteDataCurrent].HeadEntityIdx, 
-		TimedPasteData[TimedPasteDataCurrent].Stage, 
-		TimedPasteData[TimedPasteDataCurrent].LastID, 
-		TimedPasteData[TimedPasteDataCurrent].EntIDList, 
-		TimedPasteData[TimedPasteDataCurrent].CreatedEntities, 
-		TimedPasteData[TimedPasteDataCurrent].CreatedConstraints, 
+		TimedPasteData[TimedPasteDataCurrent].Player,
+		TimedPasteData[TimedPasteDataCurrent].EntityList,
+		TimedPasteData[TimedPasteDataCurrent].ConstraintList,
+		TimedPasteData[TimedPasteDataCurrent].HeadEntityIdx,
+		TimedPasteData[TimedPasteDataCurrent].Stage,
+		TimedPasteData[TimedPasteDataCurrent].LastID,
+		TimedPasteData[TimedPasteDataCurrent].EntIDList,
+		TimedPasteData[TimedPasteDataCurrent].CreatedEntities,
+		TimedPasteData[TimedPasteDataCurrent].CreatedConstraints,
 		TimedPasteData[TimedPasteDataCurrent].Shooting_Ent,
 		TimedPasteDataCurrent,
 		TimedPasteData[TimedPasteDataCurrent].HitPos,
@@ -2206,7 +2226,7 @@ function AdvDupe.OverTimePasteProcess( Player, EntityList, ConstraintList, HeadE
 		
 	elseif Stage == 2 then
 		
-		--for EntID, Ent in pairs( CreatedEntities ) do	
+		--for EntID, Ent in pairs( CreatedEntities ) do
 		for i = 1,PostEntityPastePerTick do
 			if EntIDList[ LastID ] then
 				
@@ -2216,7 +2236,7 @@ function AdvDupe.OverTimePasteProcess( Player, EntityList, ConstraintList, HeadE
 				if (Ent != nil) then
 					local NoFail, Result = xpcall( AdvDupe.AfterPasteApply, debug.traceback, Player, Ent, CreatedEntities )
 					if ( !NoFail ) then
-						MsgN("AdvDupeERROR: AfterPasteApply, Error: ",tostring(Result))
+						Msg"[AdvDupe] " print("AfterPasteApply Error: "..tostring(Result))
 					end
 				end
 				
@@ -2254,7 +2274,7 @@ function AdvDupe.OverTimePasteProcess( Player, EntityList, ConstraintList, HeadE
 						end
 						
 					else
-						MsgN("AdvDupeERROR:Created Constraint Bad! Type= ",(Constraint.Type or "NIL"))
+						Msg"[AdvDupe] " print("Bad Constraint: "..tostring(Constraint.Type or "NIL"))
 						Entity = nil
 					end
 				end
@@ -2394,7 +2414,7 @@ function AdvDupe.FinishPasting( TimedPasteData,TimedPasteDataCurrent )
 	if ( TimedPasteData[TimedPasteDataCurrent].CallOnPasteFin ) then
 		TimedPasteData[TimedPasteDataCurrent].CallOnPasteFin(
 			TimedPasteData[TimedPasteDataCurrent].Shooting_Ent,
-			TimedPasteData[TimedPasteDataCurrent].CreatedEntities, 
+			TimedPasteData[TimedPasteDataCurrent].CreatedEntities,
 			TimedPasteData[TimedPasteDataCurrent].CreatedConstraints
 		)
 	end
@@ -2425,12 +2445,12 @@ function AdvDupe.PasteEntity( Player, EntTable, EntID, Offset, HoldAngle )
 		
 		local Success, Result = xpcall( duplicator.ApplyEntityModifiers, debug.traceback, Player, Ent )
 		if ( !Success ) then
-			MsgN("AdvDupeERROR: ApplyEntityModifiers, Error: ",tostring(Result))
+			Msg"[AdvDupe] " print("ApplyEntityModifiers, Error: ",tostring(Result))
 		end
 		
 		local Success, Result = xpcall( duplicator.ApplyBoneModifiers, debug.traceback, Player, Ent )
 		if ( !Success ) then
-			MsgN("AdvDupeERROR: ApplyBoneModifiers Error: ",tostring(Result))
+			Msg"[AdvDupe] " print("ApplyBoneModifiers Error: ",tostring(Result))
 		end
 		
 		if ( EntTable.Skin ) then Ent:SetSkin( EntTable.Skin ) end
@@ -2447,7 +2467,7 @@ function AdvDupe.PasteEntity( Player, EntTable, EntID, Offset, HoldAngle )
 		
 	else
 		
-		MsgN("AdvDupeERROR:Created Entity Bad! Class: ",(EntTable.Class or "NIL")," Ent: ",EntID)
+		Msg"[AdvDupe] " print("Invalid class '",(EntTable.Class or "NIL"),"' Ent: ",EntID)
 		
 	end
 	
@@ -2595,15 +2615,15 @@ function AdvDupe.CreateConstraintFromTable( Player, Constraint, EntityList, Offs
 		
 		if ( Key == "pl" ) then Val = Player end
 		
-		for i=1, 6 do 
+		for i=1, 6 do
 			if ( Constraint.Entity[ i ] ) then
-				if ( Key == "Ent"..i ) or ( Key == "Ent" ) then						
+				if ( Key == "Ent"..i ) or ( Key == "Ent" ) then
 					if ( Constraint.Entity[ i ].World ) then
 						Val = game.GetWorld()
 					else
-						Val = EntityList[ Constraint.Entity[ i ].Index ] 
+						Val = EntityList[ Constraint.Entity[ i ].Index ]
 						if (!Val) or (!Val:IsValid()) then
-							MsgN("AdvDupeERROR: Problem with = ",(Constraint.Type or "NIL")," Constraint. Could not find Ent: ",Constraint.Entity[ i ].Index)
+							Msg"[AdvDupe] " print("Constraint '",(Constraint.Type or "NIL"),"' failed. Ent not found: ",Constraint.Entity[ i ].Index)
 							return
 						end
 					end
@@ -2636,8 +2656,8 @@ function AdvDupe.CreateConstraintFromTable( Player, Constraint, EntityList, Offs
 	
 	if ( DebugWeldsByDrawingThem) and ( Constraint.Type == "Weld" ) then
 		RDbeamlib.MakeSimpleBeam(
-			EntityList[ Constraint.Entity[ 1 ].Index ], Vector(0,0,0), 
-			EntityList[ Constraint.Entity[ 2 ].Index ], Vector(0,0,0), 
+			EntityList[ Constraint.Entity[ 1 ].Index ], Vector(0,0,0),
+			EntityList[ Constraint.Entity[ 2 ].Index ], Vector(0,0,0),
 			"cable/cable2", Color(255,0,0,255), 1, true
 		)
 	end
@@ -2646,7 +2666,7 @@ function AdvDupe.CreateConstraintFromTable( Player, Constraint, EntityList, Offs
 	
 	local ok, Result = xpcall( Factory.Func, debug.traceback, unpack(Args) )
 	if ( !ok ) then
-		MsgN("AdvDupeERROR: CreateConstraint failed to make \"",(Constraint.Type or "NIL"),"\", Error: ",tostring(Result))
+		Msg"[AdvDupe] " print("CreateConstraint failed on ",(Constraint.Type or "NIL"),": ",tostring(Result))
 		AdvDupe.SendClientError( Player, "Failed to make \""..(Constraint.Type or "NIL").."\"" )
 		return
 	else
@@ -2705,10 +2725,10 @@ function AdvDupe.AfterPasteApply( Player, Ent, CreatedEntities )
 	
 	--clean up
 	if (Ent.EntityMods) then
-		if (Ent.EntityMods.RDDupeInfo) then -- fix: RDDupeInfo leak 
+		if (Ent.EntityMods.RDDupeInfo) then -- fix: RDDupeInfo leak
 			Ent.EntityMods.RDDupeInfo = nil
 		end
-		if (Ent.EntityMods.WireDupeInfo) then 
+		if (Ent.EntityMods.WireDupeInfo) then
 			Ent.EntityMods.WireDupeInfo = nil
 		end
 	end
@@ -2775,9 +2795,9 @@ end)
 --	Ent make check hooks
 --
 --	Add a hook to check if player should be allowed to make the ent. return true to allow ent creation, false to deny
--- 	Example hook:	
---	AdvDupe.AddEntCheckHook( "TestHook", 
---		function(Player, Ent, EntTable) return true end, 
+-- 	Example hook:
+--	AdvDupe.AddEntCheckHook( "TestHook",
+--		function(Player, Ent, EntTable) return true end,
 --		function(HookName) Msg("my advdupe ent check hook \""..HookName.."\" died and was removed\n") end )
 --
 local CheckFunctions = {}
@@ -2816,7 +2836,7 @@ function AdvDupe.CheckOkEnt( Player, EntTable )
 		return true
 	elseif ( test and test.t and test.t.AdminSpawnable and !test.t.Spawnable ) then
 		AdvDupe.SendClientError(Player, "Sorry, you can't cheat like that")
-		MsgN("AdvDupeERROR: ",tostring(Player)," tried to paste admin only prop ",(EntTable.Class or "NIL")," : ",EntID)
+		Msg"[AdvDupe] " print(tostring(Player)," tried to paste admin only prop ",(EntTable.Class or "NIL")," : ",EntID)
 		return false
 	else
 		return true
@@ -2848,7 +2868,7 @@ if (!game.SinglePlayer()) then
 		if string.find(ClassName, "^weapon_.*")
 		or string.find(ClassName, "^item_.*")
 		or string.find(ClassName, "^npc_.*") then
-			MsgN("AdvDupe: disalowing ",tostring(Player)," pasting item ",ClassName," (NoItems Rule)")
+			Msg"[AdvDupe] " print("Denying ",tostring(Player)," from pasting ",ClassName," (NoItems Rule)")
 			AdvDupe.SendClientInfoMsg(Player, "Not allowed to paste Weapons or NPCs", true)
 			return false
 		else
@@ -2881,7 +2901,7 @@ if (!game.SinglePlayer()) then
 		if DisallowedClasses[ClassName] then
 			if (DisallowedClasses[ClassName] == 2) then return false
 			elseif ( DisallowedClasses[ClassName] == 1 and !Player:IsAdmin( ) and !Player:IsSuperAdmin() ) then
-				MsgN("AdvDupe: disalowing ",tostring(Player)," pasting item ",ClassName," (DisallowedClass Rule)")
+				Msg"[AdvDupe] " print("disalowing ",tostring(Player)," pasting item ",ClassName," (DisallowedClass Rule)")
 				AdvDupe.SendClientInfoMsg(Player, "Not allowed to paste "..ClassName, true)
 				return false
 			end
@@ -2897,10 +2917,10 @@ end
 local function ModelCheck(Player, ClassName, EntTable)
 	if EntTable.Model then
 		if string.find(EntTable.Model, "^%*%d+") then --crash fix for brushes :/
-			MsgN("AdvDupe: ",tostring(Player),": trying to use a brush ",tostring(EntTable.Model)," on ",ClassName," (ModelCheck)")
+			Msg"[AdvDupe] " print(tostring(Player),": trying to use a brush ",tostring(EntTable.Model)," on ",ClassName," (ModelCheck)")
 			return false
 		elseif !util.IsValidModel(EntTable.Model) then
-			MsgN("AdvDupe: ",tostring(Player),": invalid model ",tostring(EntTable.Model)," on ",ClassName," (ModelCheck)")
+			Msg"[AdvDupe] " print(tostring(Player),": invalid model ",tostring(EntTable.Model)," on ",ClassName," (ModelCheck)")
 			AdvDupe.SendClientInfoMsg(Player, "Invalid (missing?) model "..EntTable.Model.." for "..ClassName, true)
 			return false
 		end
@@ -3041,7 +3061,7 @@ function AdvDupe.PasteGetEntArgs( ply, EntTable, offset )
 			elseif	key == "pos"	or key == "position"		then Arg = Arg + offset or Vector(0,0,0)
 			elseif	key == "vel"	or key == "velocity"		then Arg = Arg or Vector(0,0,0)
 			elseif	key == "avel"	or key == "anglevelocity"	then Arg = Arg or Vector(0,0,0)
-			elseif	key == "pl" 	or key == "ply"				then Arg = ply 
+			elseif	key == "pl" 	or key == "ply"				then Arg = ply
 			-- TODO:  Arg = ply.GetBySteamID(Arg)
 			end
 			
@@ -3108,7 +3128,7 @@ function AdvDupe.OldMakeProp( ply, Pos, Ang, Model, Vel, aVel, frozen )
 		ed:SetEntity( Ent )
 	util.Effect( "propspawn", ed )
 	
-	return Ent	
+	return Ent
 end
 
 -- Legacy prop phyics function
@@ -3225,7 +3245,7 @@ function AdvDupe.OldSetPhysProp( ply, ent, BoneID, Bone, Data )
 		
 		if ( !Bone ) then
 			Bone = Entity:GetPhysicsObjectNum( BoneID )
-			if ( !Bone || !Bone:IsValid() ) then 
+			if ( !Bone || !Bone:IsValid() ) then
 				Msg("SetPhysProp: Error applying attributes to invalid physics object!\n")
 				return
 			end
@@ -3238,7 +3258,7 @@ function AdvDupe.OldSetPhysProp( ply, ent, BoneID, Bone, Data )
 			PhysBone:EnableGravity( gravityb )
 			Data2.GravityToggle = gravityb
 		end
-		if (Data.material!= nil)		then 
+		if (Data.material!= nil)		then
 			PhysBone:EnableGravity( gravityb )
 			Data2.Material = material
 		end
@@ -3258,7 +3278,7 @@ function AdvDupe.OldSetPhysProp( ply, ent, BoneID, Bone, Data )
 		for k, v in pairs(Data2) do
 			Entity.PhysicsObjects = Entity.PhysicsObjects or {}
 			Entity.PhysicsObjects[ BoneID ] = Entity.PhysicsObjects[ BoneID ] or {}
-			Entity.PhysicsObjects[ BoneID ][k] = v 
+			Entity.PhysicsObjects[ BoneID ][k] = v
 		end
 		
 		-- HACK HACK
@@ -3291,7 +3311,7 @@ function AdvDupe.PasteGetConstraintArgs( ply, Constraint, entIDtable, offset )
 			
 		-- If key represents an Local angle or vector, convert from string, back to a vector
 		elseif	(string.find(key, "LPos")	and ( len == 4 or len == 5 ))
-		or	(string.find(key, "Ang")	and ( len == 3 or len == 4 )) then 
+		or	(string.find(key, "Ang")	and ( len == 3 or len == 4 )) then
 			Arg = Arg or Vector(0,0,0)
 			
 		-- If key represents a World Vector or angle, convert from string, back to a vector
@@ -3355,7 +3375,7 @@ end
 		
 			EntOffsets[ ent ] = {}
 			
-			if ( ent != HeadEntity ) then 
+			if ( ent != HeadEntity ) then
 				
 				local Pos = ent:GetPos()
 				local Ang = ent:GetAngles()
@@ -3403,7 +3423,7 @@ end
 			for phys, ptab in pairs( tab.Bones ) do
 				
 				phys:SetPos( HeadEntity:LocalToWorld( ptab.Pos ) )
-				phys:SetAngle( HeadEntity:GetAngles() + ptab.Ang )
+				phys:SetAngles( HeadEntity:GetAngles() + ptab.Ang )
 				
 			end
 			
@@ -3448,7 +3468,7 @@ end
 				local len = string.len(key)
 				if	string.find(key, "Ent")
 				and	( len == 3 or len == 4 )
-				and	Ent:IsValid() 
+				and	Ent:IsValid()
 				and	!EntTable[Ent:EntIndex()] then
 					
 					EntTable, ConstraintTable  = duplicator.GetEnts(Ent, EntTable, ConstraintTable)
