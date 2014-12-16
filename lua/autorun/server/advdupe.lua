@@ -349,7 +349,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 				
 				
 			else
-				Msg"[AdvDupe] " print("FILE FAILED TO LOAD! something is wrong with this file:  ",filepath)
+				Msg"[AdvDupe] " print("Failed to load",filepath,"for",ply)
 				AdvDupe.SendClientError( ply, "Failed loading file" )
 				AdvDupe.SetPercent( ply, -1 )
 			end
@@ -367,6 +367,12 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 	if f then
 		temp = f:Read( f:Size() )
 		f:Close()
+		if not temp then
+			Msg"[AdvDupe] " print("Invalid file ",filepath,"for",ply)
+			AdvDupe.SendClientError( ply, "Failed loading file (empty?)" )
+			AdvDupe.SetPercent( ply, -1 )
+			return
+		end
 	end
 	timer.Simple(.1, function() Load1( ply, filepath, tool, temp) end)
 	
