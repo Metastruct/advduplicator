@@ -17,6 +17,18 @@ AdvDupe.Version = 1.85
 AdvDupe.ToolVersion = 1.9
 AdvDupe.FileVersion = 0.84
 
+local queue_enablemotion={}
+
+function AdvDupe.EnableMotionQueue(Phys,enable,alwaysdelay)
+	if not Phys:IsValid() then return end
+	if not enable and alwaysdelay~=true then 
+		Phys:EnableMotion(false)
+		return
+	end
+	table.insert(queue_enablemotion,{Phys,enable})
+end
+
+
 CreateConVar( "sv_AdvDupeEnablePublicFolder", 1, {FCVAR_ARCHIVE} )
 
 --[[---------------------------------------------------------
@@ -1784,6 +1796,16 @@ local function AdvDupeThink()
 		end
 	end
 	
+	for i=1,math.ceil((engine.TickInterval())*100) do -- adjust based on tickrate
+		local t = table.remove(queue_enablemotion,1)
+		local phys=t and t[1]
+		if phys and phys:IsValid() then
+			phys:EnableMotion(t[2])
+		else
+			break
+		end
+	end
+
 end
 hook.Add("Think", "AdvDupe_Think", AdvDupeThink)
 
@@ -2344,7 +2366,7 @@ function AdvDupe.OverTimePasteProcess( Player, EntityList, ConstraintList, HeadE
 									Player:AddFrozenPhysicsObject( Ent, Phys )
 								end
 							else
-								Phys:EnableMotion(true)
+								AdvDupe.EnableMotionQueue(Phys,true)
 							end
 						end
 					end
