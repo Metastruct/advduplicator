@@ -368,7 +368,7 @@ function AdvDupe.LoadDupeTableFromFile( ply, filepath )
 		temp = f:Read( f:Size() )
 		f:Close()
 		if not temp then
-			Msg"[AdvDupe] " print("Invalid file ",filepath,"for",ply)
+			Msg"[AdvDupe] " print("Invalid file '"..tostring(filepath).."' for",ply)
 			AdvDupe.SendClientError( ply, "Failed loading file (empty?)" )
 			AdvDupe.SetPercent( ply, -1 )
 			return
@@ -2473,7 +2473,7 @@ function AdvDupe.PasteEntity( Player, EntTable, EntID, Offset, HoldAngle )
 		
 	else
 		
-		Msg"[AdvDupe] " print("Invalid class '",(EntTable.Class or "NIL"),"' Ent: ",EntID)
+		Msg"[AdvDupe] " print("Invalid class '"..tostring(EntTable.Class or "NIL").."' Ent: ",EntID)
 		
 	end
 	
@@ -2927,7 +2927,7 @@ local function ModelCheck(Player, ClassName, EntTable)
 			return false
 		elseif !util.IsValidModel(EntTable.Model) then
 			Msg"[AdvDupe] " print(tostring(Player),": invalid model ",tostring(EntTable.Model)," on ",ClassName," (ModelCheck)")
-			AdvDupe.SendClientInfoMsg(Player, "Invalid (missing?) model "..EntTable.Model.." for "..ClassName, true)
+			AdvDupe.SendClientInfoMsg(Player, "Invalid (missing?) model '"..EntTable.Model.."' for "..ClassName, true)
 			return false
 		end
 	end
