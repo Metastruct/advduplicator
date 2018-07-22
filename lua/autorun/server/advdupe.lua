@@ -10,6 +10,7 @@ if (!dupeshare) then Msg("===AdvDupe: Error! dupeshare module not loaded\n") end
 -----------------------------------------------------------]]
 
 AdvDupe = {}
+AdvDupe.DEBUG = false
 
 if (CLIENT) then return end
 
@@ -2331,7 +2332,9 @@ function AdvDupe.OverTimePasteProcess( Player, EntityList, ConstraintList, HeadE
 						end
 						
 					else
-						Msg"[AdvDupe] " print("Bad Constraint: "..tostring(Constraint.Type or "NIL"))
+						if AdvDupe.DEBUG then
+							Msg"[AdvDupe] " print("Bad Constraint: "..tostring(Constraint.Type or "NIL"))
+						end
 						Entity = nil
 					end
 				end
